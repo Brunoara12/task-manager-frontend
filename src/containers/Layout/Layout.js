@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import styled from 'styled-components'
+import NavBar from '../../components/Navigation/NavBar/NavBar';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import Login from '../Auth/Login/Login';
+import UserHome from '../../components/UI/UserHome/UserHome'
+
+import gif from '../../assets/Images/astraldefense.gif'
+
+const StyledMain = styled.main`
+    height: 100%;
+    background-image: url(${gif});
+
+`
+
+class Layout extends Component {
+    render() {
+        return (
+            <React.Fragment>
+                <NavBar />
+                <StyledMain>
+                    <Switch>
+                        <Route path="/users/me" component={UserHome} />
+                        <Route path="/users/login" component={Login} />
+                        <Redirect path='/' to='/users/login' />
+                    </Switch>
+                    {/* <p>Sign-up</p>
+                    <p>Tasks</p> */}
+                </StyledMain>
+            </React.Fragment>
+        );
+    }
+}
+
+export default Layout;
