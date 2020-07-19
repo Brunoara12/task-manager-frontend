@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class Task extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+            <p>
+                TESTING//{this.props.task.description}
+            </p>
         );
     }
 }

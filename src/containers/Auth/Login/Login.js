@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import axios from 'axios'
 
 import CenterScreen from '../../../components/UI/CenterScreen/CenterScreen';
-import {instance, setAuthToken} from '../../../axios';
+import { setAuthToken } from '../../../axios';
 
+import gif from '../../../assets/Images/astraldefense.gif'
 
 
 const StyledLoginBox = styled.div`
@@ -35,6 +36,11 @@ const StyledLoginBox = styled.div`
     }
 `
 
+const StyledBackground = styled.div`
+    background-image: url(${gif});
+    height: 100%;
+`
+
 class Login extends Component {
     state = {
         email: 'Email',
@@ -58,8 +64,11 @@ class Login extends Component {
         axios.post(this.props.match.url, loginForm)
             .then(res => {
                 this.setState({ isSubmitting: false })
+                localStorage.setItem('token', res.data.token)
+                // To LOG OFF
+                // localStorage.removeItem('token')
                 console.log(res.data.token)
-                setAuthToken(res.data.token)          
+                setAuthToken(res.data.token)
                 this.props.history.push('/users/me')
             }).catch(err => {
                 this.setState({ isSubmitting: false })
@@ -69,22 +78,24 @@ class Login extends Component {
 
     render() {
         return (
-            <CenterScreen>
-                <StyledLoginBox>
-                    <h1>Task Manager</h1>
-                    <p>...Track your goals</p>
-                    <form onSubmit={this.loginHandler}>
-                        <label htmlFor="email">
-                            <input type='text' placeholder={this.state.email} onChange={this.emailHandler} />
-                        </label>
-                        <label htmlFor="password">
-                            <input type='password' placeholder='Password' onChange={this.passwordHandler} />
-                        </label>
-                        <input type='submit' value='Submit' disabled={this.state.isSubmitting}></input>
-                        <button>Sign Up</button>
-                    </form>
-                </StyledLoginBox>
-            </CenterScreen>
+            <StyledBackground>
+                <CenterScreen>
+                    <StyledLoginBox>
+                        <h1>Task Manager</h1>
+                        <p>...Track your goals</p>
+                        <form onSubmit={this.loginHandler}>
+                            <label htmlFor="email">
+                                <input type='text' placeholder={this.state.email} onChange={this.emailHandler} />
+                            </label>
+                            <label htmlFor="password">
+                                <input type='password' placeholder='Password' onChange={this.passwordHandler} />
+                            </label>
+                            <input type='submit' value='Submit' disabled={this.state.isSubmitting}></input>
+                            <button>Sign Up</button>
+                        </form>
+                    </StyledLoginBox>
+                </CenterScreen>
+            </StyledBackground>
         );
     }
 }

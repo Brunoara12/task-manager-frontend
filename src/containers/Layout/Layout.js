@@ -6,15 +6,14 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from '../Auth/Login/Login';
 import UserHome from '../../components/UI/UserHome/UserHome'
 
-import gif from '../../assets/Images/astraldefense.gif'
-
 const StyledMain = styled.main`
     height: 100%;
-    background-image: url(${gif});
 
 `
 
 class Layout extends Component {
+    
+
     render() {
         return (
             <React.Fragment>
