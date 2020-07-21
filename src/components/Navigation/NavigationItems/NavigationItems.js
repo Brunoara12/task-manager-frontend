@@ -4,7 +4,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 function NavigationItems(props) {
     return (
         <ul>
-            <NavigationItem />
+            <NavigationItem isLoggedIn={props.isLoggedIn}/>
         </ul>
     );
 }

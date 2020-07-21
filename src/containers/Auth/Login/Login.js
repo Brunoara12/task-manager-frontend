@@ -65,11 +65,13 @@ class Login extends Component {
             .then(res => {
                 this.setState({ isSubmitting: false })
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('userID', res.data.user._id)
                 // To LOG OFF
                 // localStorage.removeItem('token')
-                console.log(res.data.token)
+                console.log('RECEIVED TOKEN in LOGIN')
                 setAuthToken(res.data.token)
                 this.props.history.push('/users/me')
+                window.location.reload(true); 
             }).catch(err => {
                 this.setState({ isSubmitting: false })
                 console.log(err)

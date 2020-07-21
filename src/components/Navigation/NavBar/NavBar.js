@@ -26,7 +26,7 @@ function NavBar(props) {
     return (
         <StyledHeader>
             <nav>
-                <NavigationItems />
+                <NavigationItems isLoggedIn={props.isLoggedIn}/>
             </nav>
         </StyledHeader>
     );

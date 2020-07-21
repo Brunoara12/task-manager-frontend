@@ -6,17 +6,18 @@ import Task from '../../components/Task/Task'
 import { getAuthToken } from '../../axios'
 
 function Tasks(props) {
-    const [id, setID] = useState(props.userID)
-    const [tasks, setTasks] = useState(null)
+    const [id, setID] = useState('test')
+    const [userName, setUserName] = useState(props.userName)
+    const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-
+        console.log(props)
         axios.get('/tasks', { headers: { 'Authorization': getAuthToken() } })
             .then(res => {
                 console.log(res.data)
                 setTasks(res.data)
-                console.log(typeof(res.data))
-                console.log(typeof(tasks))
+                console.log(Array.isArray(res.data))
+                console.log(Array.isArray(tasks))
             }).catch(e => {
                 console.log(e)
             })
@@ -24,17 +25,24 @@ function Tasks(props) {
     }, [])
 
     const taskList = () => {
-        tasks.map((task) => {
-            return <li><Task task={task}/></li>
+        return tasks.map((task) => {
+            return <Task
+                key={task._id}
+                title={task.title}
+                description={task.description} 
+                priority={task.priority}
+                completed={task.completed}
+                updatedAt={task.updatedAt}
+                createdAt={task.createdAt}/>
         })
     }
 
     return (
         <div>
-            <ul>
-                <p>inTASKS</p>
+            <section>
+                <h1>{userName} TASKS</h1>
                 {tasks ? taskList() : null}
-            </ul>
+            </section>
         </div>
     );
 }
