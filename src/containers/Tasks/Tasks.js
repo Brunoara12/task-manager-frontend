@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { render } from 'react-dom'
 
 import Task from '../../components/Task/Task'
 
 import { getAuthToken } from '../../axios'
+
 
 function Tasks(props) {
     const [id, setID] = useState('test')
@@ -28,13 +30,18 @@ function Tasks(props) {
         return tasks.map((task) => {
             return <Task
                 key={task._id}
+                taskId={task._id}
                 title={task.title}
-                description={task.description} 
+                description={task.description}
                 priority={task.priority}
                 completed={task.completed}
                 updatedAt={task.updatedAt}
-                createdAt={task.createdAt}/>
+                createdAt={task.createdAt} />
         })
+    }
+
+    function onSelectAlert(eventKey) {
+        alert(`Alert from menu item.\neventKey: ${eventKey}`);
     }
 
     return (

@@ -93,3 +93,57 @@ SVG Progress Ring - Initialize
 - https://css-tricks.com/building-progress-ring-quickly/
 
 ~~----------------------------------------------------------~~
+
+# Codelog #3 - 2020-07-21
+
+-----
+
+## Plan for the day
+
+- [ ] Make Tasks Clickable
+    - [ ]   Send to Other Route
+    - [ ]   Start/Plan Editing Task Implementation
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+
+-----
+
+## To investigate
+
+- Changelog Investigation
+- Flexbox Webflow CSS Ideas 
+-----
+
+## Learned today
+React-Bootstrap Seems Nice
+React-Bootstrap Dropdown doesn't work for me ... ditched bootstrap
+-----
+
+## Done today
+
+- [X] Dropdown for right clicking (Edit, Delete)
+- [X] Make Tasks Clickable
+    - [ ]   Send to Other Route
+    - [ ]   Start/Plan Editing Task Implementation
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+
+-----
+
+## Plan for tomorrow
+
+- [X] Make Tasks Clickable
+    - [ ]   Send to Other Route
+    - [ ]   Start/Plan Editing Task Implementation
+- [ ] Make Completed status clickable and Update from User Page
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+
+-----
+
+## Resource list
+
+- https://flexbox.webflow.com/
+- https://keepachangelog.com/en/1.0.0/
+
+~~----------------------------------------------------------~~

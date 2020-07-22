@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { setAuthToken } from './axios'
@@ -6,12 +6,12 @@ import { setAuthToken } from './axios'
 import Layout from './containers/Layout/Layout';
 
 function App() {
-  const [initialized ,setInitialized] = useState(false)
+  const [initialized, setInitialized] = useState(false)
   const [isLoggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if(!token) {
+    if (!token) {
       // no token found
       console.log('token NOT FOUND')
       setLoggedIn(false)
@@ -24,9 +24,11 @@ function App() {
     setInitialized(true)
   }, [])
 
+
+
   return (
     <BrowserRouter>
-      { initialized ? <Layout isLoggedIn={isLoggedIn}/> : null}
+      {initialized ? <Layout isLoggedIn={isLoggedIn} /> : null}
     </BrowserRouter>
   );
 }

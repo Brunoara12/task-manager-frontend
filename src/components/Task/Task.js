@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import TimeAgo from 'react-timeago'
 
 import ProgressRing from '../UI/ProgressRing/ProgressRing'
+import Dropdown from '../UI/Dropdown/Dropdown';
 
 const StyledTask = styled.article`
     width: 55%;
@@ -108,8 +109,10 @@ class Task extends Component {
         super(props)
         this.state = {
             isHovering: null,
-            expandState: null
+            expandState: null,
+            dropVisible: false
         }
+        this.myRef = React.createRef()
     }
 
     componentDidUpdate() {
@@ -123,7 +126,7 @@ class Task extends Component {
                     })
                     clearInterval(interval)
                 }, 2000)
-                
+
             } else {
                 let interval = setInterval(() => {
                     this.setState({
@@ -157,6 +160,25 @@ class Task extends Component {
         })
     }
 
+    contextMenuHandler = (e) => {
+        e.preventDefault()
+        let testDiv = document.getElementById(this.props.taskId)
+        console.log(testDiv)
+        this.setState({
+            xPos: `${e.clientX - testDiv.offsetLeft}px`,
+            yPos: `${e.clientY - testDiv.offsetTop}px`,
+            dropVisible: true
+        })
+    }
+
+    clickedHandler = (e) => {
+        this.setState({
+            xPos: `${e.pageX}px`,
+            yPos: `${e.pageY}px`,
+            dropVisible: false
+        })
+    }
+
     render() {
         let priorityColor = null
 
@@ -180,22 +202,37 @@ class Task extends Component {
                 priorityColor = 0
         }
 
+        
+        let taskOptions = null
+        if (this.state.clicked) {
+            taskOptions = <Dropdown></Dropdown>
+
+        }
 
         return (
-            <StyledTask onMouseEnter={this.isHoveringHandler} onMouseLeave={this.notHoveringHandler} isHovering={this.state.isHovering} expandState={this.state.expandState}>
-                <StyledBox1>
-                    <h1>{this.props.title}</h1>
-                    <StyledPriorityBox priorityColor={priorityColor}></StyledPriorityBox>
-                </StyledBox1>
-                <StyledBox2>
-                    <p>{this.props.description}</p>
-                </StyledBox2>
-                <StyledBox3>
-                    <ProgressRing completed={this.props.completed} />
-                    {/* <p>{this.props.completed ? 'True': 'False'}</p> */}
-                    <TimeAgo style={{ margin: 'auto 0px' }} date={this.props.updatedAt} />
-                </StyledBox3>
-            </StyledTask>
+                <StyledTask 
+                    id={this.props.taskId}
+                    onContextMenu={this.contextMenuHandler}
+                    onClick={this.clickedHandler} 
+                    onMouseEnter={this.isHoveringHandler} 
+                    onMouseLeave={this.notHoveringHandler} 
+                    isHovering={this.state.isHovering} 
+                    expandState={this.state.expandState}>
+                    <StyledBox1>
+                        <h1>{this.props.title}</h1>
+                        <StyledPriorityBox priorityColor={priorityColor}></StyledPriorityBox>
+                    </StyledBox1>
+                    <StyledBox2>
+                        <p>{this.props.description}</p>
+                    </StyledBox2>
+                    <StyledBox3>
+                        <ProgressRing completed={this.props.completed} />
+                        {/* <p>{this.props.completed ? 'True': 'False'}</p> */}
+                        <TimeAgo style={{ margin: 'auto 0px' }} date={this.props.updatedAt} />
+                    </StyledBox3>
+                    <Dropdown visible={this.state.dropVisible} xPos={this.state.xPos} yPos={this.state.yPos}></Dropdown>
+                </StyledTask>
+
         );
     }
 }
