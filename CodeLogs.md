@@ -147,3 +147,116 @@ React-Bootstrap Dropdown doesn't work for me ... ditched bootstrap
 - https://keepachangelog.com/en/1.0.0/
 
 ~~----------------------------------------------------------~~
+
+# Codelog #4 - 2020-07-22
+
+-----
+
+## Plan for the day
+
+- [X] Make Tasks Clickable
+    - [ ]   Send to Other Route
+    - [ ]   Start/Plan Editing Task Implementation
+- [ ] Make Completed status clickable and Update from User Page
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+
+-----
+
+## To investigate
+
+- Optimize Modal, make it more general
+- Optimize DropDown, make it more general
+- Changelog Investigation
+- Flexbox Webflow CSS Ideas 
+-----
+
+## Learned today
+CSS transtition does not like React Rerender 
+-----
+
+## Done today
+
+- [X] Make Tasks Clickable
+    - [X]   Send to Other Route
+    - [X]   Start/Plan Editing Task Implementation
+- [ ] Make Completed status clickable and Update from User Page
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+
+-----
+
+## Plan for tomorrow
+
+- [ ] Finish Implementing Editing for Task
+    -[ ] Cleanup CSS for SideModal
+- [ ] Make Completed status clickable and Update from User Page
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+- [ ] Begin implementation for Deleting a Task
+
+-----
+
+## Resource list
+
+- https://flexbox.webflow.com/
+- https://keepachangelog.com/en/1.0.0/
+
+~~----------------------------------------------------------~~
+
+# Codelog #5 - 2020-07-24 -> 07-25
+
+-----
+
+## Plan for the day
+
+- [ ] Finish Implementing Editing for Task
+    -[ ] Cleanup CSS for SideModal
+- [ ] Make Completed status clickable and Update from User Page
+- [ ] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+- [ ] Begin implementation for Deleting a Task
+
+-----
+
+## To investigate
+
+- Make Version Sprints
+- Create and Update Button Disable on Post Requests
+- Optimize Modal, make it more general
+- Optimize DropDown, make it more general
+- Changelog Investigation
+- Flexbox Webflow CSS Ideas 
+-----
+
+## Learned today
+
+-----
+
+## Done today
+
+- [X] Finish Implementing Editing for Task
+    -[X] Cleanup CSS for SideModal
+- [X] Make Completed status clickable and Update from User Page
+- [C] Create a Button to start Creating Tasks
+- [ ] Start Sign-Up Page for New Users
+- [ ] Begin implementation for Deleting a Task
+
+-----
+
+## Plan for tomorrow
+
+- [ ] Start Sign-Up Page for New Users
+- [ ] Begin implementation for Deleting a Task
+- [ ] Ability to edit Priority on Task
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## Resource list
+
+- https://flexbox.webflow.com/
+- https://keepachangelog.com/en/1.0.0/
+
+~~----------------------------------------------------------~~

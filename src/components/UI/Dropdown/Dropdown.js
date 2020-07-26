@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+import DropdownItem from './DropdownItem/DropdownItem';
 
 const StyledList = styled.ul`
     border: 1px solid #ccc;
@@ -7,15 +8,12 @@ const StyledList = styled.ul`
     margin: 0;
     padding: 0;
     background-color: #eee;
-
-    li {
-       list-style-type: none;
-       padding: 5px 10px; 
-    }
+    width:100;
 
     li:hover {
         background-color: #a8fcff;
         border-radius: 8px;
+        cursor: pointer; 
     }
 ` 
 
@@ -57,13 +55,22 @@ class Dropdown extends Component {
         })
     }
 
+    actionHandler = () => {
+        console.log('DELETING TASK')
+    }
+
+    editTaskHandler = () => {
+        this.props.showSidebar()
+        console.log('editTaskHanlder is Clicked')
+    }
+
     render() {
 
         if (this.props.visible) {
             return (
                 <StyledList style={{top: this.props.yPos, left: this.props.xPos, position: 'fixed'}}>
-                    <li>Edit</li>
-                    <li>Delete</li>
+                    <DropdownItem onClick={this.editTaskHandler} to={`/users/me/${this.props.taskId}`}>Edit</DropdownItem>
+                    <DropdownItem isClickable={true} onClick={this.actionHandler}>Delete</DropdownItem>
                 </StyledList>
             );
         } else {
