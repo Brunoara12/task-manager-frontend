@@ -63,9 +63,10 @@ class UserHome extends Component {
             newTaskData: {
                 title: '',
                 description: ''
-            }
+            },
         }
     }
+
 
     componentDidMount() {
         console.log(getAuthToken())
@@ -83,6 +84,7 @@ class UserHome extends Component {
                     userData: incomingData,
                     receivedData: true
                 })
+
                 // const posts = response.data.slice(0, 4)
                 // const updatedPosts = posts.map(post => {
                 //     return {
@@ -107,15 +109,21 @@ class UserHome extends Component {
     }
 
     submitCreateTaskHandler = (event) => {
-        event.preventDefault();
+        event.preventDefault()
+        event.target.reset()
         this.setState({
             receivedData: false
         })
         console.log(this.state.newTaskData)
-        axios.post('/tasks' , this.state.newTaskData, { headers: { "Authorization": getAuthToken() } })
+        axios.post('/tasks', this.state.newTaskData, { headers: { "Authorization": getAuthToken() } })
             .then(res => {
-                this.setState({ submitting: true })
-                this.setState({ receivedData: true})
+                this.setState({
+                    submitting: true,
+                    receivedData: true,
+                    newTaskData: {
+
+                    }
+                })
                 // const indexOfTask = this.state.tasks.findIndex(task => {
                 //     return task._id === this.state.fullTask._id
                 // })
@@ -149,10 +157,13 @@ class UserHome extends Component {
         //this.setState({ updatedTask: updatedFullTask })
     }
 
+
     render() {
         let allTasks = null
         if (this.state.receivedData) {
-            allTasks = <Tasks userID={this.state.userData.id} userName={this.state.userData.name} />
+            allTasks = <Tasks
+                userID={this.state.userData.id}
+                userName={this.state.userData.name}/>
         } else {
             allTasks = <p>LOADING</p>
         }

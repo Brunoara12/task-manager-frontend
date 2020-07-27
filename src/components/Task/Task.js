@@ -4,6 +4,8 @@ import TimeAgo from 'react-timeago'
 
 import ProgressRing from '../UI/ProgressRing/ProgressRing'
 import Dropdown from '../UI/Dropdown/Dropdown';
+import axios from 'axios';
+import { getAuthToken } from '../../axios';
 
 const StyledTask = styled.article`
     width: 55%;
@@ -17,6 +19,7 @@ const StyledTask = styled.article`
     box-shadow: 0 5px 5px 0 rgb(0,0,0,0.2), 0 6px 10px 5px rgba(0, 0, 0, 0.15);
     transform: translatey(0px);
     animation: ${props => props.isHovering ? '' : 'shrink'} 2s;
+    position: relative;
 
     @keyframes expand {
         0% {
@@ -76,7 +79,8 @@ const StyledBox1 = styled.div`
         margin: 10px, auto;
     }
 
-    div {
+    div:hover {
+        cursor: pointer;
     }
 `
 
@@ -165,81 +169,90 @@ class Task extends Component {
             isHovering: null,
             expandState: null,
             dropVisible: false,
+            priorityVisible: false,
             completed: null
         }
         this.myRef = React.createRef()
     }
 
     componentDidUpdate() {
-        let interval = null
-        if (this.state.isHovering) {
-            if (this.state.expandState === true) {
-                interval = setInterval(() => {
-                    this.setState({
-                        expandState: false
-                    })
-                    clearInterval(interval)
-                }, 2000)
+        // let interval = null
+        // if (this.state.isHovering) {
+        //     if (this.state.expandState === true) {
+        //         interval = setInterval(() => {
+        //             this.setState({
+        //                 expandState: false
+        //             })
+        //             clearInterval(interval)
+        //         }, 2000)
 
-            } else {
-                let interval = setInterval(() => {
-                    this.setState({
-                        expandState: true
-                    })
-                    clearInterval(interval)
-                }, 2000)
-            }
-        } else if (this.state.expandState === true) {
-            interval = setInterval(() => {
-                this.setState({
-                    expandState: false
-                })
-                clearInterval(interval)
-            }, 2000)
-        } else {
-            clearInterval(interval)
-        }
+        //     } else {
+        //         let interval = setInterval(() => {
+        //             this.setState({
+        //                 expandState: true
+        //             })
+        //             clearInterval(interval)
+        //         }, 2000)
+        //     }
+        // } else if (this.state.expandState === true) {
+        //     interval = setInterval(() => {
+        //         this.setState({
+        //             expandState: false
+        //         })
+        //         clearInterval(interval)
+        //     }, 2000)
+        // } else {
+        //     clearInterval(interval)
+        // }
     }
 
-    isHoveringHandler = () => {
-        this.setState({
-            isHovering: true,
-            expandState: true
-        })
+    componentDidMount() {
+        console.log('TASK MOUNTED')
     }
 
-    notHoveringHandler = () => {
-        this.setState({
-            isHovering: false
-        })
+    componentWillUnmount() {
+        console.log('TASK UNMOUNT')
     }
+
+    // isHoveringHandler = () => {
+    //     this.setState({
+    //         isHovering: true,
+    //         expandState: true
+    //     })
+    // }
+
+    // notHoveringHandler = () => {
+    //     this.setState({
+    //         isHovering: false
+    //     })
+    // }
 
     contextMenuHandler = (e) => {
         e.preventDefault()
         let testDiv = document.getElementById(this.props.taskId)
         this.setState({
-            xPos: `${e.clientX - testDiv.offsetLeft}px`,
-            yPos: `${e.clientY - testDiv.offsetTop}px`,
+            xPos: `${e.pageX - testDiv.offsetLeft}px`,
+            yPos: `${e.pageY - testDiv.offsetTop}px`,
             dropVisible: true
         })
     }
 
     clickedHandler = (e) => {
+        console.log('Also CLicked Handler')
         this.setState({
             xPos: `${e.pageX}px`,
             yPos: `${e.pageY}px`,
-            dropVisible: false
+            dropVisible: false,
+            priorityVisible: false
         })
     }
 
     completedChangeHandler = (e) => {
-        console.log('TOGGLE')
-        console.log(e.target.checked)
-        const task={
+        const task = {
             __v: this.props.__v,
             _id: this.props.taskId,
             title: this.props.title,
-            description: this.props.decription,
+            description: this.props.description,
             priority: this.props.priority,
             createdAt: this.props.createdAt,
             updatedAt: this.props.updatedAt,
@@ -250,28 +263,90 @@ class Task extends Component {
         this.props.updateCompleted(task)
     }
 
-    render() {
-        let priorityColor = null
 
-        switch (this.props.priority) {
-            case 1:
-                priorityColor = 'red'
-                break;
-            case 2:
-                priorityColor = 'orange'
-                break;
-            case 3:
-                priorityColor = 'yellow'
-                break;
-            case 4:
-                priorityColor = 'green'
-                break;
-            case 5:
-                priorityColor = 'blue'
-                break;
-            default:
-                priorityColor = 0
+    deleteTaskHandler = () => {
+        console.log('DELETING TASK')
+        this.props.deleteTask()
+    }
+
+    editTaskHandler = () => {
+        this.props.showSidebar()
+        console.log('editTaskHanlder is Clicked')
+    }
+
+    changePriorityHandler = (e) => {
+        console.log('Clicked Priority')
+        e.stopPropagation()
+        let priorityDiv = e.target
+        this.setState({
+            xPos: `${priorityDiv.offsetLeft}px`,
+            yPos: `${priorityDiv.offsetTop}px`,
+            priorityVisible: true,
+            dropVisible: false
+        })
+    }
+
+    updatePriorityHandler = (e, color) => {
+        console.log('TOGGLE')
+        console.log(color)
+        e.stopPropagation()
+        const task = {
+            __v: this.props.__v,
+            _id: this.props.taskId,
+            title: this.props.title,
+            description: this.props.description,
+            priority: this.colorToPriority(color),
+            createdAt: this.props.createdAt,
+            updatedAt: this.props.updatedAt,
+            completed: this.props.completed,
+            owner: this.props.owner
+
         }
+        this.setState({
+            dropVisible: false,
+            priorityVisible: false
+        })
+        console.log(this.state.priorityVisible)
+        console.log(task)
+        this.props.updatePriority(task)
+    }
+
+    priorityToColor = (num) => {
+        console.log(num)
+        switch (num) {
+            case 1:
+                return 'red'
+            case 2:
+                return 'orange'
+            case 3:
+                return 'yellow'
+            case 4:
+                return 'green'
+            case 5:
+                return 'blue'
+            default:
+                return 0
+        }
+    }
+
+    colorToPriority = (color) => {
+        switch (color) {
+            case 'red':
+                return 1
+            case 'orange':
+                return  2
+            case 'yellow':
+                return 3
+            case 'green':
+                return 4
+            case 'blue':
+                return 5
+            default:
+                return 0
+        }
+    }
+
+    render() {     
 
         return (
             <StyledTask
@@ -284,27 +359,40 @@ class Task extends Component {
                 expandState={this.state.expandState}>
                 <StyledBox1>
                     <h1>{this.props.title}</h1>
-                    <StyledPriorityBox priorityColor={priorityColor}></StyledPriorityBox>
+                    <StyledPriorityBox
+                        onClick={this.changePriorityHandler}
+                        priorityColor={this.priorityToColor(this.props.priority)}>
+                        <Dropdown.Menu
+                            bottom='100%'
+                            visible={this.state.priorityVisible}>
+                            <Dropdown.Button updatePriorityHandler={(e) => this.updatePriorityHandler(e,'red')} color='red'></Dropdown.Button>
+                            <Dropdown.Button updatePriorityHandler={(e) => this.updatePriorityHandler(e, 'orange')} color='orange'></Dropdown.Button>
+                            <Dropdown.Button updatePriorityHandler={(e) => this.updatePriorityHandler(e, 'yellow')} color='yellow'></Dropdown.Button>
+                            <Dropdown.Button updatePriorityHandler={(e) => this.updatePriorityHandler(e, 'green')} color='green'></Dropdown.Button>
+                            <Dropdown.Button updatePriorityHandler={(e) => this.updatePriorityHandler(e, 'blue')} color='blue'></Dropdown.Button>
+                        </Dropdown.Menu></StyledPriorityBox>
                 </StyledBox1>
                 <StyledBox2>
                     <p>{this.props.description}</p>
                 </StyledBox2>
                 <StyledBox3>
                     <StyledSwitchLabel>
-                        <input 
-                            type='checkbox' 
-                            defaultChecked={this.props.completed} 
-                            onChange={this.completedChangeHandler}/>
+                        <input
+                            type='checkbox'
+                            defaultChecked={this.props.completed}
+                            onChange={this.completedChangeHandler} />
                         <span></span>
                     </StyledSwitchLabel>
                     <TimeAgo style={{ margin: 'auto 0px' }} date={this.props.updatedAt} />
                 </StyledBox3>
-                <Dropdown
-                    showSidebar={() => this.props.showSidebar(this.props.taskId)}
-                    taskId={this.props.taskId}
+                <Dropdown.Menu
                     visible={this.state.dropVisible}
                     xPos={this.state.xPos}
-                    yPos={this.state.yPos}></Dropdown>
+                    yPos={this.state.yPos}>
+                    <Dropdown.Item onClick={() => this.props.showSidebar(this.props.taskId)} to={`/users/me/${this.props.taskId}`}>Edit</Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.props.deleteTask(this.props.taskId)} isClickable={true}>Delete</Dropdown.Item>
+                </Dropdown.Menu>
+
             </StyledTask>
 
         );

@@ -98,7 +98,6 @@ class Modal extends Component {
         this.props.onHide()
     }
 
-
     render() {
         let updateOrCreateTitle = {}
         let updateOrCreateDescription = {}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import DropdownItem from './DropdownItem/DropdownItem';
+import { NavLink } from 'react-router-dom'
+import Item from './DropdownItem/DropdownItem';
+import Button from './DropdownButton/DropdownButton';
 
 const StyledList = styled.ul`
     border: 1px solid #ccc;
@@ -8,31 +10,20 @@ const StyledList = styled.ul`
     margin: 0;
     padding: 0;
     background-color: #eee;
-    width:100;
+    position: absolute;
 
     li:hover {
         background-color: #a8fcff;
         border-radius: 8px;
         cursor: pointer; 
     }
-` 
+`
 
 
-class Dropdown extends Component {
+class Menu extends Component {
     state = {
         xPos: "0px",
         yPos: "0px",
-        visible: false
-    }
-
-    componentDidMount() {
-        //document.addEventListener("click", this.handleClick)
-        //document.addEventListener("contextmenu", this.handleContextMenu)
-    }
-
-    componentWillUnmount() {
-        //document.removeEventListener("click", this.handleClick)
-        //document.removeEventListener("contextmenu", this.handleContextMenu)
     }
 
     handleClick = () => {
@@ -45,32 +36,28 @@ class Dropdown extends Component {
         }
     }
 
-    handleContextMenu = (e) => {
-        e.preventDefault()
-        console.log('right clik')
-        this.setState({
-            xPos: `${e.pageX}px`,
-            yPos: `${e.pageY}px`,
-            visible: true
-        })
-    }
+    // handleContextMenu = (e) => {
+    //     e.preventDefault()
 
-    actionHandler = () => {
-        console.log('DELETING TASK')
-    }
+    //     this.setState({
+    //         xPos: `${e.clientX}px`,
+    //         yPos: `${e.clientY}px`,
+    //         visible: true
+    //     })
+    // }
 
-    editTaskHandler = () => {
-        this.props.showSidebar()
-        console.log('editTaskHanlder is Clicked')
-    }
 
     render() {
 
         if (this.props.visible) {
             return (
-                <StyledList style={{top: this.props.yPos, left: this.props.xPos, position: 'fixed'}}>
-                    <DropdownItem onClick={this.editTaskHandler} to={`/users/me/${this.props.taskId}`}>Edit</DropdownItem>
-                    <DropdownItem isClickable={true} onClick={this.actionHandler}>Delete</DropdownItem>
+                <StyledList
+                    style={{
+                        top: this.props.yPos,
+                        left: this.props.xPos,
+                        bottom: this.props.bottom
+                    }}>
+                    {this.props.children}
                 </StyledList>
             );
         } else {
@@ -80,4 +67,7 @@ class Dropdown extends Component {
     }
 }
 
-export default Dropdown;
+
+
+
+export default { Menu, Item, Button };

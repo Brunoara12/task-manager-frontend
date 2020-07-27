@@ -51,7 +51,7 @@ class Tasks extends Component {
     }
 
     shouldComponentUpdate(prevProp, prevState) {
-        let updating = prevState.submitting !== this.state.submitting || prevState.sidebarVisible !== this.state.sidebarVisible
+        let updating = prevState.submitting !== this.state.submitting || prevState.sidebarVisible !== this.state.sidebarVisible || prevState.tasks !== this.state.tasks
         return updating
     }
 
@@ -103,10 +103,32 @@ class Tasks extends Component {
             })
     }
 
+    updatePriorityHandler = (incTask) => {
+        console.log('IN PRIORITY UPDATE' + incTask)
+        axios.patch('/tasks/' + incTask._id, { priority: incTask.priority }, { headers: { "Authorization": getAuthToken() } })
+            .then(res => {
+                this.setState({ submitting: true })
+                console.log(res)
+                const indexOfTask = this.state.tasks.findIndex(task => {
+                    return task._id === incTask._id
+                })
+                const newTasks = [...this.state.tasks]
+                newTasks[indexOfTask] = incTask
+                console.log(this.state.tasks)
+                this.setState({ tasks: newTasks })
+                console.log(this.state.tasks)
+                console.log(res)
+            }).catch(e => {
+                console.log(e)
+            })
+    }
+
     taskList = () => {
         return this.state.tasks.map((task) => {
             return <Task
                 showSidebar={this.showFullTaskSidebar}
+                deleteTask={this.deleteTaskHandler}
+                updatePriority={this.updatePriorityHandler}
                 updateCompleted={this.updateCompletedHandler}
                 key={task._id}
                 __v={task.__v}
@@ -161,6 +183,17 @@ class Tasks extends Component {
                 this.setState({ tasks: newTasks })
                 console.log(this.state.tasks)
                 //console.log(res)
+            }).catch(e => {
+                console.log(e)
+            })
+    }
+
+    deleteTaskHandler = (_id) => {
+        this.setState({ submitting: true })
+        axios.delete('/tasks/' + _id, { headers: { 'Authorization': getAuthToken() } })
+            .then(res => {
+                window.location.reload(true);
+
             }).catch(e => {
                 console.log(e)
             })

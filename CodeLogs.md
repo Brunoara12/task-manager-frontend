@@ -238,7 +238,7 @@ CSS transtition does not like React Rerender
 - [X] Finish Implementing Editing for Task
     -[X] Cleanup CSS for SideModal
 - [X] Make Completed status clickable and Update from User Page
-- [C] Create a Button to start Creating Tasks
+- [X] Create a Button to start Creating Tasks
 - [ ] Start Sign-Up Page for New Users
 - [ ] Begin implementation for Deleting a Task
 
@@ -249,6 +249,61 @@ CSS transtition does not like React Rerender
 - [ ] Start Sign-Up Page for New Users
 - [ ] Begin implementation for Deleting a Task
 - [ ] Ability to edit Priority on Task
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## Resource list
+
+- https://flexbox.webflow.com/
+- https://keepachangelog.com/en/1.0.0/
+
+~~----------------------------------------------------------~~
+
+# Codelog #6 - 2020-07-26
+
+-----
+
+## Plan for the day
+
+- [ ] Start Sign-Up Page for New Users
+- [ ] Begin implementation for Deleting a Task
+- [ ] Ability to edit Priority on Task
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## To investigate
+
+- Make Version Sprints
+- Create and Update Button Disable on Post Requests
+- Optimize Modal, make it more general
+- Optimize DropDown, make it more general
+- Changelog Investigation
+- Flexbox Webflow CSS Ideas 
+-----
+
+## Learned today
+
+-----
+
+## Done today
+
+- [ ] Start Sign-Up Page for New Users
+- [X] Begin implementation for Deleting a Task
+- [ ] Refactor Dropdown to be more general
+- [X] Ability to edit Priority on Task
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## Plan for tomorrow
+
+- [ ] Start Sign-Up Page for New Users
+- [ ] Refactor Dropdown to be more general
 - [ ] Finish Editing and Creating ( Priority and Completed)
 - [ ] Change Floating animation to just Float up
 
