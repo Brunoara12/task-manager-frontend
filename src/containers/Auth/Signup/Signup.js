@@ -16,7 +16,8 @@ const StyledLoginBox = styled.div`
     background-color: #cef2f2;
 
     input[type=text],
-    input[type=password]{
+    input[type=password],
+    input[type=email]{
         width: 90%;
         box-sizing: border-box;
         padding: 12px 20px;
@@ -41,11 +42,16 @@ const StyledBackground = styled.div`
     height: 100%;
 `
 
-class Login extends Component {
+class Signup extends Component {
     state = {
         email: 'Email',
         password: null,
+        name: '',
         isSubmitting: false
+    }
+
+    nameHandler = (event) => {
+        this.setState({ name: event.target.value})
     }
 
     emailHandler = (event) => {
@@ -56,30 +62,33 @@ class Login extends Component {
         this.setState({ password: event.target.value })
     }
 
-    loginHandler = (event) => {
+    signupHandler = (event) => {
         event.preventDefault()
         this.setState({ isSubmitting: true })
-        let loginForm = { email: this.state.email, password: this.state.password }
-
+        let loginForm = { 
+            name: this.state.name,
+            email: this.state.email, 
+            password: this.state.password
+         }
+        console.log(loginForm)
         axios.post(this.props.match.url, loginForm)
             .then(res => {
                 this.setState({ isSubmitting: false })
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('userID', res.data.user._id)
-                // To LOG OFF
-                // localStorage.removeItem('token')
-                console.log('RECEIVED TOKEN in LOGIN')
+                
+                console.log('RECEIVED TOKEN in SIGNUP')
                 setAuthToken(res.data.token)
                 this.props.history.push('/users/me')
-                window.location.reload(true); 
+                window.location.reload(true);
             }).catch(err => {
                 this.setState({ isSubmitting: false })
-                console.log(err)
+                console.log(err.response)
             })
     }
 
-    signupPageHandler = () => {
-        this.props.history.push('/users')
+    loginPageHandler = () => {
+        this.props.history.push('/users/login')
     }
 
     render() {
@@ -87,17 +96,20 @@ class Login extends Component {
             <StyledBackground>
                 <CenterScreen>
                     <StyledLoginBox>
-                        <h1>Task Manager</h1>
-                        <p>...Track your goals</p>
-                        <form onSubmit={this.loginHandler}>
+                        <h1>Sign Up</h1>
+                        <p>...Begin Tracking your goals</p>
+                        <form onSubmit={this.signupHandler}>
+                            <label htmlFor="name">
+                                <input type='text' placeholder="Joe Smith" onChange={this.nameHandler} />
+                            </label>
                             <label htmlFor="email">
-                                <input type='text' placeholder={this.state.email} onChange={this.emailHandler} />
+                                <input type='email' placeholder={this.state.email} onChange={this.emailHandler} />
                             </label>
                             <label htmlFor="password">
                                 <input type='password' placeholder='Password' onChange={this.passwordHandler} />
                             </label>
-                            <input type='submit' value='Submit' disabled={this.state.isSubmitting}></input>
-                            <button onClick={this.signupPageHandler}>Sign Up</button>
+                            <input type='submit' value='Create User!' disabled={this.state.isSubmitting}></input>
+                            <button onClick={this.loginPageHandler}>Log In</button>
                         </form>
                     </StyledLoginBox>
                 </CenterScreen>
@@ -106,4 +118,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Signup;

@@ -7,6 +7,7 @@ import Login from '../Auth/Login/Login';
 import Logout from '../Auth/Logout/Logout';
 import UserHome from '../../components/UI/UserHome/UserHome'
 import Main from '../hoc/Main/Main'
+import Signup from '../Auth/Signup/Signup';
 
 
 class Layout extends Component {
@@ -31,6 +32,7 @@ class Layout extends Component {
                 {NavBarV}
                 <Main initializeMainHandler={this.setMainInitialized}>
                     <Switch>
+                        <Route exact path="/users/" component={Signup} />
                         <Route path="/users/me" component={UserHome} />
                         <Route exact path="/users/login" component={Login} />
                         <Route exact path="/users/logout" component={Logout} />
