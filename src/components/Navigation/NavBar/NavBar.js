@@ -4,21 +4,22 @@ import styled from 'styled-components'
 import NavigationItems from '../NavigationItems/NavigationItems';
 
 const StyledHeader = styled.header`
-    height: 48px;
+    height: 55px;
     width: 100%;
     position: fixed;
+    padding: 0;
     top: 0;
     left: 0;
     background-color: #a8fcff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
     box-sizing: border-box;
     z-index: 90;
 
     nav {
         height: 100%;
+        width: 100%;
     }
 `
 

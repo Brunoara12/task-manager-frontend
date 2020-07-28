@@ -261,7 +261,7 @@ CSS transtition does not like React Rerender
 
 ~~----------------------------------------------------------~~
 
-# Codelog #6 - 2020-07-26
+# Codelog #6 - 2020-07-26 -> 07-27
 
 -----
 
@@ -291,10 +291,11 @@ CSS transtition does not like React Rerender
 
 ## Done today
 
-- [ ] Start Sign-Up Page for New Users
+- [X] Start Sign-Up Page for New Users
 - [X] Begin implementation for Deleting a Task
-- [ ] Refactor Dropdown to be more general
+- [X] Refactor Dropdown to be more general
 - [X] Ability to edit Priority on Task
+- [X] Edit User on Settings Page
 - [ ] Finish Editing and Creating ( Priority and Completed)
 - [ ] Change Floating animation to just Float up
 
@@ -302,8 +303,7 @@ CSS transtition does not like React Rerender
 
 ## Plan for tomorrow
 
-- [ ] Start Sign-Up Page for New Users
-- [ ] Refactor Dropdown to be more general
+- [ ] Tidy up CSS Styling to make app ready for launch v1.0.0
 - [ ] Finish Editing and Creating ( Priority and Completed)
 - [ ] Change Floating animation to just Float up
 

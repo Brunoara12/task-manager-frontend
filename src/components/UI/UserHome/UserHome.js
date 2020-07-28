@@ -85,14 +85,6 @@ class UserHome extends Component {
                     receivedData: true
                 })
 
-                // const posts = response.data.slice(0, 4)
-                // const updatedPosts = posts.map(post => {
-                //     return {
-                //         ...post,
-                //         author: 'Max'
-                //     }
-                // })
-                // this.setState({ posts: updatedPosts })
                 console.log(response)
                 console.log(this.state)
             }).catch(e => {
