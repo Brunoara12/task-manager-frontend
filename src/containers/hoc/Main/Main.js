@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StyledMain = styled.main`
     height: 100%;
 
-    margin: 55px 0 0 0;
+    //margin: 80px 0 0 0;
 `
 
 class Main extends Component {

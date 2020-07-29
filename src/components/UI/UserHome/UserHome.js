@@ -7,10 +7,14 @@ import SideModal from '../Modals/SideModal'
 import FullTask from '../../Task/FullTask/FullTask'
 
 import { getAuthToken } from '../../../axios'
+import HelpModal from '../Modals/HelpModal';
 
 const StyledUserHome = styled.div`
-    margin-top: 150px;
-
+    padding: 50px 0;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    height: 100%;
+    
     #Main-Bar {
         background-image: none; 
     }
@@ -22,22 +26,56 @@ const StyledCreateButton = styled.div`
     justify-content: flex-end;
     margin: 0 8%;
 
+`
+
+const CreateButtonSpan = styled.span`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    background-color: lightgreen;
+
+    p {
+        flex: 1;
+        padding: 0 10px;
+        margin: 10px 0;
+        font-size: 1.2em;
+    }
+
     button{
-        //flex: 1;
-        background-color: lightgreen;
-        font-size: 4em;
+        flex: 1;
+        margin: 0 10px 0 0;
+        color: lightgreen;
+        background-color: white;
+        font-size: 2em;
         text-align: center;
-        line-height: 90px;
-        width: 120px;
-        height: 100px;
+        line-height: 25px;
+        width: 35px;
+        height: 35px;
         border: 1px solid lightgreen;
-        border-radius: 15px;
+        border-radius: 9px;
     }
 
-    button:hover{
+    &:hover{
         background-color: #71BC78;
+        cursor: pointer;
+        button{
+            color: #71BC78;
+            cursor: pointer;
+        }
 
     }
+`
+
+const StyledTasks = styled.div`
+    margin: 0px auto;
+    width: 70%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-align:center;
+    background-color: #e6faff;
 `
 
 class UserHome extends Component {
@@ -155,26 +193,32 @@ class UserHome extends Component {
         if (this.state.receivedData) {
             allTasks = <Tasks
                 userID={this.state.userData.id}
-                userName={this.state.userData.name}/>
+                userName={this.state.userData.name} />
         } else {
             allTasks = <p>LOADING</p>
         }
 
         return (
             <StyledUserHome>
-                <StyledCreateButton>
-                    <button onClick={this.createTaskHandler}>+</button>
-                </StyledCreateButton>
-                {allTasks}
-                <SideModal
-                    onHide={this.onHideFullTaskSidebar}
-                    show={this.state.sidebarVisible} >
-                    <FullTask
-                        submitTask={this.submitCreateTaskHandler}
-                        onTitleChange={this.titleChangeHandler}
-                        onDescChange={this.descChangeHandler}
-                        placeholderData={this.state.placeholderData} />
-                </SideModal>
+                <HelpModal></HelpModal>
+                <StyledTasks>
+                    <StyledCreateButton>
+                        <CreateButtonSpan onClick={this.createTaskHandler}>
+                            <p>New</p>
+                            <button>+</button>
+                        </CreateButtonSpan>
+                    </StyledCreateButton>
+                    {allTasks}
+                    <SideModal
+                        onHide={this.onHideFullTaskSidebar}
+                        show={this.state.sidebarVisible} >
+                        <FullTask
+                            submitTask={this.submitCreateTaskHandler}
+                            onTitleChange={this.titleChangeHandler}
+                            onDescChange={this.descChangeHandler}
+                            placeholderData={this.state.placeholderData} />
+                    </SideModal>
+                </StyledTasks>
             </StyledUserHome>
         );
     }

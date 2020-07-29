@@ -20,6 +20,7 @@ const StyledTask = styled.article`
     transform: translatey(0px);
     animation: ${props => props.isHovering ? '' : 'shrink'} 2s;
     position: relative;
+    background-color: white;
 
     @keyframes expand {
         0% {
@@ -51,7 +52,6 @@ const StyledTask = styled.article`
 `
 
 const StyledPriorityBox = styled.div`
-    background-color: red;
     width: 45px;
     height: 20px;
     border-radius: 4px;
@@ -76,6 +76,7 @@ const StyledBox1 = styled.div`
     justify-content: space-between;
 
     h1 {
+        flex: 7;
         margin: 10px, auto;
     }
 

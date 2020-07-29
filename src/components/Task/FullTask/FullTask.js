@@ -79,6 +79,10 @@ const StyledInputButton = styled.input`
       font-size: 1.5em;
       border-radius: 5px;
 
+      &:hover {
+        background-color: #71BC78;
+        cursor: pointer;
+      }
 `
 
 class Modal extends Component {
@@ -102,20 +106,23 @@ class Modal extends Component {
         let updateOrCreateTitle = {}
         let updateOrCreateDescription = {}
         let submitButtonText = ''
-        if(this.props.fullTask) {
+        let headerText = ''
+        if (this.props.fullTask) {
             updateOrCreateTitle['defaultValue'] = this.props.fullTask.title
             updateOrCreateDescription['defaultValue'] = this.props.fullTask.description
             submitButtonText = 'Make Changes'
+            headerText = 'Update Your Task Below'
         } else {
             updateOrCreateTitle['placeholder'] = this.props.placeholderData.title
             updateOrCreateDescription['placeholder'] = this.props.placeholderData.description
             submitButtonText = 'Create Task'
+            headerText = 'Create Your New Task Below!'
         }
 
         return (
             <StyledFullTask>
                 <form onSubmit={this.props.submitTask}>
-
+                    <h1>{headerText}</h1>
                     <StyledEditTextBox
                         onChange={this.props.onTitleChange}
                         type="text"

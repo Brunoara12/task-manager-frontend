@@ -5,10 +5,10 @@ import axios from 'axios'
 import CenterScreen from '../../../components/UI/CenterScreen/CenterScreen';
 import { setAuthToken } from '../../../axios';
 
-import gif from '../../../assets/Images/astraldefense.gif'
+import taskBackground from '../../../assets/Images/task-white-board.jpg'
 
 
-const StyledLoginBox = styled.div`
+const StyledSignupBox = styled.div`
     width: 400px;
     border: 1px solid #a8fcff;
     text-align:center;
@@ -27,20 +27,56 @@ const StyledLoginBox = styled.div`
         border-radius: 4px;
     }
 
+    .ownsAcc {
+        display: flex;
+        justify-content: flex-end;
+
+        p{
+            font-size: .9em;
+            margin: 0 55px 0 0;
+        }
+    }
+`
+
+const StyledFlexBox = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+    span {
+        flex: 1;
+    }
+
     input[type=submit], button {
         display: inline-block;
-        width: 25%;
+        width: 80%;
         margin: 10px;
         padding: 8px;
         border-radius: 5px;
         border: 1px solid #a8fcff;
+        background-color: #b3f0ff;
+    }
+
+    input[type=submit]{
+        background-color: #00FFFF;
+    }
+
+    input[type=submit]:hover {
+        background-color: #008fb3;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #66e0ff;
+        cursor: pointer;
     }
 `
 
 const StyledBackground = styled.div`
-    background-image: url(${gif});
+    background-image: url(${taskBackground});
     height: 100%;
 `
+
+
 
 class Signup extends Component {
     state = {
@@ -51,7 +87,7 @@ class Signup extends Component {
     }
 
     nameHandler = (event) => {
-        this.setState({ name: event.target.value})
+        this.setState({ name: event.target.value })
     }
 
     emailHandler = (event) => {
@@ -65,18 +101,18 @@ class Signup extends Component {
     signupHandler = (event) => {
         event.preventDefault()
         this.setState({ isSubmitting: true })
-        let loginForm = { 
+        let loginForm = {
             name: this.state.name,
-            email: this.state.email, 
+            email: this.state.email,
             password: this.state.password
-         }
+        }
         console.log(loginForm)
         axios.post(this.props.match.url, loginForm)
             .then(res => {
                 this.setState({ isSubmitting: false })
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('userID', res.data.user._id)
-                
+
                 console.log('RECEIVED TOKEN in SIGNUP')
                 setAuthToken(res.data.token)
                 this.props.history.push('/users/me')
@@ -95,7 +131,7 @@ class Signup extends Component {
         return (
             <StyledBackground>
                 <CenterScreen>
-                    <StyledLoginBox>
+                    <StyledSignupBox>
                         <h1>Sign Up</h1>
                         <p>...Begin Tracking your goals</p>
                         <form onSubmit={this.signupHandler}>
@@ -108,10 +144,19 @@ class Signup extends Component {
                             <label htmlFor="password">
                                 <input type='password' placeholder='Password' onChange={this.passwordHandler} />
                             </label>
-                            <input type='submit' value='Create User!' disabled={this.state.isSubmitting}></input>
-                            <button onClick={this.loginPageHandler}>Log In</button>
+                            <span className='ownsAcc'>
+                                <p>Already own<br></br>an account?</p>
+                            </span>
+                            <StyledFlexBox>
+                                <span>
+                                    <input type='submit' value='Create User!' disabled={this.state.isSubmitting}></input>
+                                </span>
+                                <span>
+                                    <button onClick={this.loginPageHandler}>Log In</button>
+                                </span>
+                            </StyledFlexBox>
                         </form>
-                    </StyledLoginBox>
+                    </StyledSignupBox>
                 </CenterScreen>
             </StyledBackground>
         );

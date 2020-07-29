@@ -14,6 +14,11 @@ const StyledList = styled.li`
         display: inline-block;
         box-sizing: border-box;
         text-align: center;
+        color: black;
+    }
+
+    a:visited, a:active {
+        color: black;
     }
 
 

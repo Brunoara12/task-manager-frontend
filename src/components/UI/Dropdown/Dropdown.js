@@ -9,14 +9,16 @@ const StyledList = styled.ul`
     border-radius: 8px;
     margin: 0;
     padding: 0;
-    background-color: #eee;
+    background-color: #a8fcff;
     position: absolute;
 
     li:hover {
-        background-color: #a8fcff;
+        background-color: #fafafa;
         border-radius: 8px;
         cursor: pointer; 
     }
+
+
 `
 
 

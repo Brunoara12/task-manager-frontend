@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import NavigationItems from '../NavigationItems/NavigationItems';
 
 const StyledHeader = styled.header`
-    height: 55px;
+    height: 80px;
     width: 100%;
     position: fixed;
     padding: 0;
@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
     left: 0;
     background-color: #a8fcff;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     z-index: 90;

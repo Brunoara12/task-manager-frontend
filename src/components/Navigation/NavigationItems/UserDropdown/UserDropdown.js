@@ -28,21 +28,21 @@ class UserDropdown extends Component {
         }
     }
 
-    showUserSettingsHandler = () => {
-        this.setState({
-            visible: true
-        })
+    toggleUserSettingsHandler = () => {
+        this.setState(prevState => ({
+            visible: !prevState.visible
+        }))
     }
 
     render() {
         return (
             <React.Fragment>
                 <StyledList>
-                    <img src={userProfile} onClick={this.showUserSettingsHandler}></img>
+                    <img src={userProfile} onClick={this.toggleUserSettingsHandler}></img>
                     <Dropdown.Menu
                         visible={this.state.visible}>
-                        <Dropdown.Item to='/users/me'>Home</Dropdown.Item>
-                        <Dropdown.Item to='/users/me/settings'>Settings</Dropdown.Item>
+                        <Dropdown.Item to='/users/me' onClick={this.toggleUserSettingsHandler}>Home</Dropdown.Item>
+                        <Dropdown.Item to='/users/me/settings' onClick={this.toggleUserSettingsHandler}>Settings</Dropdown.Item>
                     </Dropdown.Menu>
                 </StyledList>
             </React.Fragment>

@@ -5,7 +5,7 @@ import axios from 'axios'
 import CenterScreen from '../../../components/UI/CenterScreen/CenterScreen';
 import { setAuthToken } from '../../../axios';
 
-import gif from '../../../assets/Images/astraldefense.gif'
+import taskBackground from '../../../assets/Images/task-white-board.jpg'
 
 
 const StyledLoginBox = styled.div`
@@ -14,6 +14,13 @@ const StyledLoginBox = styled.div`
     text-align:center;
     border-radius: 9px;
     background-color: #cef2f2;
+    box-shadow: 1px 10px 20px 5px #888888 ;
+
+    p {
+        font-size: 1.5em;
+        margin: 0;
+    }
+
 
     input[type=text],
     input[type=password]{
@@ -26,19 +33,65 @@ const StyledLoginBox = styled.div`
         border-radius: 4px;
     }
 
+    input[type=password] {
+        margin: 16px auto 10px auto;
+    }
+
+    
+
+    .createAcc {
+        display: flex;
+        justify-content: flex-end;
+
+        p{
+            font-size: .9em;
+            margin: 0 55px 0 0;
+        }
+    }
+    
+`
+
+const StyledBackground = styled.div`
+    background-image: url(${taskBackground});
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+`
+
+const StyledFlexBox = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+    span {
+        flex: 1;
+    }
+
+
+
     input[type=submit], button {
         display: inline-block;
-        width: 25%;
+        width: 80%;
         margin: 10px;
         padding: 8px;
         border-radius: 5px;
         border: 1px solid #a8fcff;
+        background-color: #b3f0ff;
     }
-`
 
-const StyledBackground = styled.div`
-    background-image: url(${gif});
-    height: 100%;
+    input[type=submit]{
+        background-color: #00FFFF;
+    }
+
+    input[type=submit]:hover {
+        background-color: #008fb3;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #66e0ff;
+        cursor: pointer;
+    }
+
 `
 
 class Login extends Component {
@@ -71,7 +124,7 @@ class Login extends Component {
                 console.log('RECEIVED TOKEN in LOGIN')
                 setAuthToken(res.data.token)
                 this.props.history.push('/users/me')
-                window.location.reload(true); 
+                window.location.reload(true);
             }).catch(err => {
                 this.setState({ isSubmitting: false })
                 console.log(err)
@@ -96,8 +149,17 @@ class Login extends Component {
                             <label htmlFor="password">
                                 <input type='password' placeholder='Password' onChange={this.passwordHandler} />
                             </label>
-                            <input type='submit' value='Submit' disabled={this.state.isSubmitting}></input>
-                            <button onClick={this.signupPageHandler}>Sign Up</button>
+                            <span className='createAcc'>
+                                <p>Don't have <br></br>an account?</p>
+                            </span>
+                            <StyledFlexBox>
+                                <span>
+                                    <input type='submit' value='Log In' disabled={this.state.isSubmitting}></input>
+                                </span>
+                                <span>
+                                    <button onClick={this.signupPageHandler}>Sign Up</button>
+                                </span>
+                            </StyledFlexBox>
                         </form>
                     </StyledLoginBox>
                 </CenterScreen>

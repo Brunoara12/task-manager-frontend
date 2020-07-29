@@ -315,3 +315,52 @@ CSS transtition does not like React Rerender
 - https://keepachangelog.com/en/1.0.0/
 
 ~~----------------------------------------------------------~~
+
+# Codelog #7 - 2020-07-28
+
+-----
+
+## Plan for the day
+
+- [ ] Tidy up CSS Styling to make app ready for launch v1.0.0
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## To investigate
+
+- Create and Update Button Disable on Post Requests
+- Optimize Modal, make it more general
+- Optimize DropDown, make it more general
+- Changelog Investigation
+- Flexbox Webflow CSS Ideas 
+-----
+
+## Learned today
+
+-----
+
+## Done today
+
+- [X] Tidy up CSS Styling to make app ready for launch v1.0.0
+- [X] Added Help Icon for New Users
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## Plan for tomorrow
+
+- [ ] Make New Version Sprints
+- [ ] Finish Editing and Creating ( Priority and Completed)
+- [ ] Change Floating animation to just Float up
+
+-----
+
+## Resource list
+
+- https://flexbox.webflow.com/
+- https://keepachangelog.com/en/1.0.0/
+
+~~----------------------------------------------------------~~

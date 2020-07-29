@@ -1,10 +1,10 @@
-React Task Manager App
+React Task Manager App - WhatsNext
 ============
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Brunoara12/task-manager-frontend)
 
 This is a basic Task Manager App created in React which allows users to login and create a TODO List. Tasks can be color-coded by importance. The backend database [task-manager-server] is connected to this webapp and it allows users to connect to this database.
 
-![App Preview](https://i.imgur.com/dZ0Azf6.png)
+![App Preview](https://i.imgur.com/hNDCU4h.png)
 
 ## Demo
 Here is a working live demo: https://rebaza-b--task-manager.herokuapp.com/
@@ -16,10 +16,12 @@ Here is a working live demo: https://rebaza-b--task-manager.herokuapp.com/
 - Color Code by Importance
 - Mark as completed
 - Create, Edit, Delete Tasks 
+- Edit Use Details
+
 ## Future Updates
 - Add Attachments to Tasks
 - View other's task that are set to public
-- Completed Bar
+- Completed Bar (Total Tasks)
 - Archive Tasks
 - Status on Tasks
 
@@ -38,9 +40,6 @@ Once the dependencies are installed, you can run  `npm start` to start the appli
 ---
 
 ## License
->You can check out the full license [here](https://github.com/IgorAntun/node-chat/blob/master/LICENSE)
 
 This project is licensed under the terms of the **MIT** license.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

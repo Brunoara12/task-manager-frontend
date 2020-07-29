@@ -10,7 +10,11 @@ import FullTask from '../../components/Task/FullTask/FullTask'
 import { getAuthToken } from '../../axios'
 import SideModal from '../../components/UI/Modals/SideModal'
 
-
+const StyledTasksSection = styled.section`
+    h1.taskHeader {
+        font-size: 2.5em;
+    }
+`
 
 class Tasks extends Component {
     constructor(props) {
@@ -203,10 +207,10 @@ class Tasks extends Component {
         return (
             <React.Fragment>
                 <div>
-                    <section>
-                        <h1>{this.state.userName} TASKS</h1>
+                    <StyledTasksSection>
+                        <h1 className="taskHeader">{this.state.userName} TASKS</h1>
                         {this.state.tasks ? this.taskList() : null}
-                    </section>
+                    </StyledTasksSection>
                 </div>
 
                 <SideModal

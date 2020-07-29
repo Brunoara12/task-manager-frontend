@@ -36,6 +36,7 @@ class Layout extends Component {
                         <Route exact path="/users/" component={Signup} />
                         <Route exact path="/users/me" component={UserHome} />
                         <Route path="/users/me/settings" component={UserSettings} />
+                        <Route path="/users/me/:id" component={UserHome} />
                         <Route exact path="/users/login" component={Login} />
                         <Route exact path="/users/logout" component={Logout} />
                         <Redirect path='/' to='/users/login' />
